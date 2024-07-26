@@ -4,7 +4,7 @@ import axios from "axios";
 import { getCurrentMonth } from "../utils/getMonth.util";
 
 const fetchDataByMonth  = async (month) => {
-    const response =  await axios.get(`http://localhost:8080/api/v1/attendance?month=${month}`)
+    const response =  await axios.get(`https://espartanitosapi.netlify.app/api/v1/attendance?month=${month}`)
     return response.data
 };
 

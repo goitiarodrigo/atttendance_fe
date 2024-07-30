@@ -4,7 +4,7 @@ import axios from "axios";
 import { getCurrentMonth } from "../utils/getMonth.util";
 
 const fetchDataByMonth  = async (month) => {
-    const response =  await axios.get(`http://ec2-15-229-10-222.sa-east-1.compute.amazonaws.com:8080/api/v1/attendance?month=${month}`)
+    const response =  await axios.get(`https://island-spice-gorilla.glitch.me/api/v1/attendance?month=${month}`)
     return response.data
 };
 

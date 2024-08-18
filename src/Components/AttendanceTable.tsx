@@ -4,7 +4,7 @@ import axios from "axios";
 import { getCurrentMonth } from "../utils/getMonth.util";
 
 const fetchDataByMonth  = async (month) => {
-    const response =  await axios.get(`https://island-spice-gorilla.glitch.me/api/v1/attendance?month=${month}`)
+    const response =  await axios.get(`https://upbeat-dusty-apology.glitch.me/api/v1/attendance?month=${month}`)
     return response.data
 };
 
@@ -25,7 +25,7 @@ const AttendanceTable = () => {
 
     const calculateAttendancePercentage = (attendance: any) => {
         const totalDays = Object.keys(attendance).length;
-        const attendedDays = Object.values(attendance).filter((day) => day).length;
+        const attendedDays = Object.values(attendance).filter((day: any) => day.status).length;
         return (attendedDays / totalDays) * 100;
     };
 
@@ -60,8 +60,8 @@ const AttendanceTable = () => {
                             <th className="border border-gray-200 p-2">Jugador</th>
                                 {
                                     data.length > 0 && Object.keys(data[0].attendance).map((date, index) => (
-                                        <th key={index} className="border border-gray-200 p-2">{date}</th>
-                                    ))
+                                            <th key={index} className="border border-gray-200 p-2">{`${date} \n ${data[0]?.attendance[date]?.type || "-"}`}</th>
+                                        ))
                                 }
                             <th className="border border-gray-200 p-2">% de asistencia</th>
                         </tr>
@@ -73,9 +73,9 @@ const AttendanceTable = () => {
                                     <tr key={index} className="hover:bg-gray-100">
                                         <td className="border border-gray-200 p-2">{student.name}</td>
                                         {Object.keys(student.attendance).map((date, index) => (
-                                        <td key={index} className="border border-gray-200 p-2 text-center">
-                                            {student.attendance[date] ? '✔️' : '❌'}
-                                        </td>
+                                            <td key={index} className="border border-gray-200 p-2 text-center">
+                                                {student.attendance[date].status ? '✔️' : '❌'}
+                                            </td>
                                         ))}
                                         <td className="border border-gray-200 p-2 text-center">
                                         {calculateAttendancePercentage(student.attendance).toFixed(2)}%
